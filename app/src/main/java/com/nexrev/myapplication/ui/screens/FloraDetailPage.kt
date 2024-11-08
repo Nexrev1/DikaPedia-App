@@ -124,5 +124,5 @@ fun FloraDetailPage(navController: NavController, floraId: String?) {
 @Preview(showBackground = true)
 @Composable
 fun FloraDetailPagePreview() {
-    FloraDetailPage(navController = rememberNavController(), floraId = "flora2")
+    FloraDetailPage(navController = rememberNavController(), floraId = "flora1")
 }
