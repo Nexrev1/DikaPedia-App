@@ -2,6 +2,7 @@ package com.nexrev.myapplication.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -11,6 +12,8 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -26,12 +29,22 @@ import androidx.navigation.NavController
 import com.nexrev.myapplication.R
 import com.nexrev.myapplication.ui.models.DataFlora
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.nexrev.myapplication.ui.components.BottomNavbar
 
 @Composable
 fun FloraPage(navController: NavController) {
     val classifications = listOf(
+        Pair("xerofit", R.drawable.ic_xerofit),
+        Pair("hidrofit", R.drawable.ic_hidrofit),
+        Pair("higrofit", R.drawable.ic_higrofit),
+        Pair("halofit", R.drawable.ic_halofit),
+        Pair("mesofit", R.drawable.ic_mesofit)
     )
+
+    val selectedCategory = remember { mutableStateOf("xerofit") }
     val floraList = DataFlora.getFloraData()
+    val filteredFloraList = floraList.filter { it.category == selectedCategory.value }
 
     Scaffold(
         topBar = {
@@ -39,6 +52,9 @@ fun FloraPage(navController: NavController) {
                 title = { Text("Dika Pedia App", color = Color.White) },
                 backgroundColor = Color(0xFF388E3C)
             )
+        },
+        bottomBar = {
+            BottomNavbar(navController = navController)
         }
     ) { paddingValues ->
         Column(
@@ -63,6 +79,9 @@ fun FloraPage(navController: NavController) {
                     val (classificationName, iconResId) = classifications[index]
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier
+                            .padding(vertical = 8.dp)
+                            .clickable { selectedCategory.value = classificationName }
                     ) {
                         Image(
                             painter = painterResource(id = iconResId),
@@ -74,6 +93,7 @@ fun FloraPage(navController: NavController) {
                             contentScale = ContentScale.Crop,
                         )
                         Text(
+                            text = classificationName.capitalize(),
                             fontSize = 12.sp,
                             color = Color(0xFF558B2F),
                             fontWeight = FontWeight.Bold,
@@ -91,14 +111,20 @@ fun FloraPage(navController: NavController) {
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 modifier = Modifier.fillMaxSize()
             ) {
+                items(filteredFloraList.size) { index ->
+                    val flora = filteredFloraList[index]
                     Box(
                         modifier = Modifier
                             .height(180.dp)
                             .clip(RectangleShape)
+                            .clickable {
+                                navController.navigate("flora_detail/${flora.id}")
+                            }
                     ) {
                         Image(
                             painter = painterResource(id = flora.imageResId),
                             contentDescription = flora.name,
+                            modifier = Modifier.fillMaxSize(),
                             contentScale = ContentScale.Crop
                         )
                         Box(
