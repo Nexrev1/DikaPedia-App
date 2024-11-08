@@ -9,13 +9,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import com.nexrev.myapplication.ui.screens.FaunaPage
-import com.nexrev.myapplication.ui.screens.FloraPage
-import com.nexrev.myapplication.ui.screens.HomePage
-import com.nexrev.myapplication.ui.screens.FloraDetailPage
 import com.nexrev.myapplication.ui.theme.DikapediaAppTheme
 
 class MainActivity : ComponentActivity() {
@@ -25,21 +18,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             DikapediaAppTheme {
-                val navController = rememberNavController()
-                Scaffold(
-                    modifier = Modifier.fillMaxSize()
-                ) { innerPadding ->
-                    NavHost(
-                        navController = navController,
-                        startDestination = "home",
                         modifier = Modifier.padding(innerPadding)
-                    ) {
-                        composable("home") { HomePage(navController) }
-                        composable("floraScreen") { FloraPage(navController) }
-                        composable("faunaScreen") { FaunaPage(navController) }
-                        composable("flora_detail/{floraId}") { backStackEntry ->
-                            val floraId = backStackEntry.arguments?.getString("floraId")
-                            FloraDetailPage(navController = navController, floraId = floraId)
                         }
                     }
                 }
