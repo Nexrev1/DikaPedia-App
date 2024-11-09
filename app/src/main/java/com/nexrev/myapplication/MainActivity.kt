@@ -1,5 +1,6 @@
 package com.nexrev.myapplication
 
+import KlasifikasiDetailPage
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -41,6 +42,7 @@ class MainActivity : ComponentActivity() {
                         composable("floraScreen") { FloraPage(navController) }
                         composable("faunaScreen") { FaunaPage(navController) }
                         composable("about") { AboutPage(navController) }
+                        composable("KlasifikasiDetailPage") {KlasifikasiDetailPage(navController)}
                         composable("flora_detail/{floraId}") { backStackEntry ->
                             val floraId = backStackEntry.arguments?.getString("floraId") ?: ""
                             FloraDetailPage(navController = navController, floraId = floraId)

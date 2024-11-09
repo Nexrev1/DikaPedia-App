@@ -29,7 +29,6 @@ fun BottomNavbar(navController: NavController) {
         contentColor = Color.Black,
         elevation = 8.dp
     ) {
-        // Klasifikasi Item
         BottomNavigationItem(
             icon = {
                 Icon(
@@ -39,9 +38,9 @@ fun BottomNavbar(navController: NavController) {
                 )
             },
             label = { Text(text = stringResource(id = R.string.klasifikasi), fontSize = 10.sp) },
-            selected = currentDestination?.route == "klasifikasi_detail",
+            selected = currentDestination?.route == "KlasifikasiDetailPage",
             onClick = {
-                navController.navigate("klasifikasi_detail") {
+                navController.navigate("KlasifikasiDetailPage") {
                     launchSingleTop = true
                     restoreState = true
                 }
@@ -50,7 +49,6 @@ fun BottomNavbar(navController: NavController) {
 
         Spacer(modifier = Modifier.width(16.dp))
 
-        // Center Home button with Circle background
         BottomNavigationItem(
             icon = {
                 Box(
@@ -71,7 +69,7 @@ fun BottomNavbar(navController: NavController) {
             selected = currentDestination?.route == "home",
             onClick = {
                 navController.navigate("home") {
-                    popUpTo("home") { // Clear the backstack and go to home
+                    popUpTo("home") {
                         inclusive = true
                     }
                     launchSingleTop = true

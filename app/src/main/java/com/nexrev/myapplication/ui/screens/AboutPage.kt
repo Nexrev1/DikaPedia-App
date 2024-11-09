@@ -19,24 +19,20 @@ import androidx.navigation.compose.rememberNavController
 import com.nexrev.myapplication.R
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AboutPage(navController: NavController) {
+fun AboutPage(navController: NavController? = null) {
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text("About Me", color = Color.White) },
-                colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary
-                ),
                 navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back")
+                    IconButton(onClick = { navController?.popBackStack() }) {
+                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back", tint = Color.White)
                     }
-                }
+                },
+                colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = MaterialTheme.colorScheme.primary)
             )
         }
     ) { paddingValues ->
@@ -48,7 +44,7 @@ fun AboutPage(navController: NavController) {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Surface(
-                modifier = Modifier.size(130.dp),
+                modifier = Modifier.size(120.dp),
                 shape = CircleShape,
                 color = Color.Gray
             ) {
@@ -59,28 +55,34 @@ fun AboutPage(navController: NavController) {
                 )
             }
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(16.dp))
 
             Text(
                 text = "Muhammad Ikhsan Andika",
-                fontSize = 26.sp,
+                fontSize = 22.sp,
                 fontWeight = FontWeight.Bold,
                 color = MaterialTheme.colorScheme.primary
             )
 
-            Spacer(modifier = Modifier.height(8.dp))
+            Spacer(modifier = Modifier.height(4.dp))
 
             Text(
                 text = "muhammadikhsanandika263@gmail.com",
-                fontSize = 16.sp,
+                fontSize = 14.sp,
                 color = Color.Gray
             )
 
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(16.dp))
+
+            Divider(
+                color = Color.LightGray,
+                thickness = 1.dp,
+                modifier = Modifier.padding(vertical = 16.dp)
+            )
 
             Text(
                 text = "Dinamika Bangsa University",
-                fontSize = 20.sp,
+                fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = MaterialTheme.colorScheme.secondary
             )
@@ -91,6 +93,25 @@ fun AboutPage(navController: NavController) {
                 text = "Information System Bachelor Degree",
                 fontSize = 16.sp,
                 color = Color.Gray
+            )
+
+            Spacer(modifier = Modifier.height(24.dp))
+
+            Text(
+                text = "About Me",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.primary
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Text(
+                text = "I am a passionate Information System student with a keen interest in technology and innovation. Always eager to learn and explore new areas of development, particularly in mobile and web applications.",
+                fontSize = 14.sp,
+                color = Color.Gray,
+                modifier = Modifier.padding(horizontal = 16.dp),
+                lineHeight = 20.sp
             )
         }
     }
