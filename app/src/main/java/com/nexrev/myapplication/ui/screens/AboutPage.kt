@@ -23,16 +23,19 @@ import androidx.compose.material.icons.filled.ArrowBack
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AboutPage(navController: NavController? = null) {
+    val neonBlue = Color(0xFF00FFFF)
+
     Scaffold(
+        containerColor = Color.Black,
         topBar = {
             TopAppBar(
-                title = { Text("About Me", color = Color.White) },
+                title = { Text("About Me", color = neonBlue) },
                 navigationIcon = {
                     IconButton(onClick = { navController?.popBackStack() }) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back", tint = Color.White)
+                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back", tint = neonBlue)
                     }
                 },
-                colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = MaterialTheme.colorScheme.primary)
+                colors = TopAppBarDefaults.smallTopAppBarColors(containerColor = Color.Black)
             )
         }
     ) { paddingValues ->
@@ -61,7 +64,7 @@ fun AboutPage(navController: NavController? = null) {
                 text = "Muhammad Ikhsan Andika",
                 fontSize = 22.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary
+                color = neonBlue
             )
 
             Spacer(modifier = Modifier.height(4.dp))
@@ -75,7 +78,7 @@ fun AboutPage(navController: NavController? = null) {
             Spacer(modifier = Modifier.height(16.dp))
 
             Divider(
-                color = Color.LightGray,
+                color = Color.DarkGray,
                 thickness = 1.dp,
                 modifier = Modifier.padding(vertical = 16.dp)
             )
@@ -84,7 +87,7 @@ fun AboutPage(navController: NavController? = null) {
                 text = "Dinamika Bangsa University",
                 fontSize = 18.sp,
                 fontWeight = FontWeight.SemiBold,
-                color = MaterialTheme.colorScheme.secondary
+                color = neonBlue
             )
 
             Spacer(modifier = Modifier.height(4.dp))
@@ -101,7 +104,7 @@ fun AboutPage(navController: NavController? = null) {
                 text = "About Me",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.primary
+                color = neonBlue
             )
 
             Spacer(modifier = Modifier.height(8.dp))
